@@ -8,7 +8,7 @@
  * @since   1.0.0
  */
 
-add_shortcode( 'polaroid-2', 'mm_polaroid_2_shortcode' );
+add_shortcode( 'polaroid_2', 'mm_polaroid_2_shortcode' );
 /**
  * Output Polaroid 2.
  *
@@ -41,23 +41,23 @@ function mm_polaroid_2_shortcode( $atts, $content = null, $tag ) {
 	ob_start(); ?>
 
 	<div class="<?php echo $mm_classes; ?>">
-	<?php if ( isset( $link_array['url'] ) && ! empty( $link_array['url'] ) ) : ?>
-		<a href="<?php echo $link_array['url']; ?>" title="<?php echo $link_array['title']; ?>">
-	<?php endif; ?>
 
-	<?php if ( $title ) : ?>
-		<h3><?php echo $title; ?></h3>
-	<?php endif; ?>
+		<?php if ( isset( $link_array['url'] ) && ! empty( $link_array['url'] ) ) : ?>
+			<a href="<?php echo $link_array['url']; ?>" title="<?php echo $link_array['title']; ?>">
+		<?php endif; ?>
+
+		<?php if ( $title ) : ?>
+			<h3><?php echo $title; ?></h3>
+		<?php endif; ?>
 
 		<div class="polaroid-wrap">
-		<?php if ( $image ) : ?>
-			<?php echo wp_get_attachment_image( $image, 'polaroid' ); ?>
-		<?php endif; ?>
+			<?php if ( $image ) : ?>
+				<?php echo wp_get_attachment_image( $image, 'polaroid' ); ?>
+			<?php endif; ?>
 
-		<?php if ( $caption ) : ?>
-			<div class="caption <?php echo $caption_color; ?>"><?php echo $caption; ?></h3></div>
-		<?php endif; ?>
-
+			<?php if ( $caption ) : ?>
+				<div class="caption <?php echo $caption_color; ?>"><?php echo $caption; ?></h3></div>
+			<?php endif; ?>
 		</div>
 
 		<?php if ( isset( $link_array['url'] ) && ! empty( $link_array['url'] ) ) : ?>
@@ -80,9 +80,10 @@ add_action( 'vc_before_init', 'mm_vc_polaroid_2' );
  * @since  1.0.0
  */
 function mm_vc_polaroid_2() {
+
 	vc_map( array(
 		'name' => __( 'Polaroid 2', 'mm-add-ons' ),
-		'base' => 'polaroid-2',
+		'base' => 'polaroid_2',
 		'class' => '',
 		'icon' => MM_PLUG_ASSETS_URL . 'component_icon.png',
 		'category' => __( 'Content', 'mm-add-ons' ),

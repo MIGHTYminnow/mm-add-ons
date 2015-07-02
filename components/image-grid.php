@@ -38,15 +38,19 @@ function mm_image_grid_shortcode( $atts, $content = null, $tag ) {
 	$mm_classes = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, $mm_classes, $tag, $atts );
 
 	ob_start(); ?>
-	<div class="<?php echo $mm_classes; ?>">
-	<?php if ( $title ) : ?>
-		<h4><?php echo $title; ?></h4>
-	<?php endif; ?>
 
-	<?php if ( $content ) : ?>
-		<?php echo $content; ?>
-	<?php endif; ?>
+	<div class="<?php echo $mm_classes; ?>">
+
+		<?php if ( $title ) : ?>
+			<h4><?php echo $title; ?></h4>
+		<?php endif; ?>
+
+		<?php if ( $content ) : ?>
+			<?php echo $content; ?>
+		<?php endif; ?>
+
 	</div>
+
 	<?php
 
 	$output = ob_get_clean();
@@ -59,7 +63,7 @@ function mm_image_grid_shortcode( $atts, $content = null, $tag ) {
 
 add_shortcode( 'image_grid_image', 'mm_image_grid_image_shortcode' );
 /**
- * [image-grid-image title="" image="" text="" link="" author_img=""]
+ * [image_grid_image title="" image="" text="" link="" author_img=""]
  *
  * @since  1.0.0
  *
@@ -96,27 +100,27 @@ function mm_image_grid_image_shortcode( $atts, $content = null, $tag ) {
 
 	<div class="<?php echo $mm_classes; ?>">
 
-	<?php if ( isset( $link_array['url'] ) && ! empty( $link_array['url'] ) ) : ?>
-		<a href="<?php echo $link_array['url']; ?>" title="<?php echo $link_array['title']; ?>">
-	<?php endif; ?>
+		<?php if ( isset( $link_array['url'] ) && ! empty( $link_array['url'] ) ) : ?>
+			<a href="<?php echo $link_array['url']; ?>" title="<?php echo $link_array['title']; ?>">
+		<?php endif; ?>
 
-	<?php if ( $image ) : ?>
-		<?php echo wp_get_attachment_image( $image, $image_size ); ?>
-	<?php endif; ?>
+		<?php if ( $image ) : ?>
+			<?php echo wp_get_attachment_image( $image, $image_size ); ?>
+		<?php endif; ?>
 
-	<div class="caption">
-	<?php if ( $title ) : ?>
-		<div class="title"><?php echo $title; ?></div>
-	<?php endif; ?>
+		<div class="caption">
+			<?php if ( $title ) : ?>
+				<h4><?php echo $title; ?></h4>
+			<?php endif; ?>
 
-	<?php if ( $subtitle ) : ?>
-		<div class="subtitle"><?php echo $subtitle; ?></div>
-	<?php endif; ?>
-	</div>
+			<?php if ( $content ) : ?>
+				<?php echo $content; ?>
+			<?php endif; ?>
+		</div>
 
-	<?php if ( isset( $link_array['url'] ) && ! empty( $link_array['url'] ) ) : ?>
-		</a>
-	<?php endif; ?>
+		<?php if ( isset( $link_array['url'] ) && ! empty( $link_array['url'] ) ) : ?>
+			</a>
+		<?php endif; ?>
 
 	</div>
 

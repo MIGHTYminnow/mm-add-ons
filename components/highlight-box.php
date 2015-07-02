@@ -43,24 +43,24 @@ function mm_highlight_box_shortcode( $atts, $content = null, $tag ) {
 
 	<div class="<?php echo $mm_classes; ?>">
 
-	<?php if ( ! empty( $atts['heading_text'] ) ) : ?>
-		<h3><?php echo $atts['heading_text']; ?></h3>
-	<?php endif; ?>
+		<?php if ( ! empty( $atts['heading_text'] ) ) : ?>
+			<h3><?php echo $atts['heading_text']; ?></h3>
+		<?php endif; ?>
 
-	<?php if ( ! empty( $atts['paragraph_text'] ) ) : ?>
-		<p><?php echo $atts['paragraph_text']; ?></p>
-	<?php endif; ?>
+		<?php if ( ! empty( $atts['paragraph_text'] ) ) : ?>
+			<p><?php echo $atts['paragraph_text']; ?></p>
+		<?php endif; ?>
 
-	<?php
-	if ( ! empty( $atts['link_text'] ) && ! empty( $link_array['url'] ) ) {
-		printf( '<a href="%s" title="%s" target="%s">%s</a>',
-			$link_array['url'],
-			$link_array['title'],
-			$link_array['target'],
-			$atts['link_text']
-		);
-	}
-	?>
+		<?php
+		if ( ! empty( $atts['link_text'] ) && ! empty( $link_array['url'] ) ) {
+			printf( '<a href="%s" title="%s" target="%s">%s</a>',
+				$link_array['url'],
+				$link_array['title'],
+				$link_array['target'],
+				$atts['link_text']
+			);
+		}
+		?>
 
 	</div>
 
@@ -78,6 +78,7 @@ add_action( 'vc_before_init', 'mm_vc_highlight_box' );
  * @since  1.0.0
  */
 function mm_vc_highlight_box() {
+
 	vc_map( array(
 		'name' => __( 'Highlight Box', 'mm-add-ons' ),
 		'base' => 'mm_highlight_box',

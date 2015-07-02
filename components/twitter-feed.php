@@ -8,7 +8,7 @@
  * @since   1.0.0
  */
 
-add_shortcode( 'twitter-feed', 'mm_twitter_feed_shortcode' );
+add_shortcode( 'twitter_feed', 'mm_twitter_feed_shortcode' );
 /**
  * Output Twitter Feed.
  *
@@ -47,24 +47,26 @@ function mm_twitter_feed_shortcode( $atts, $content = null, $tag ) {
 	$mm_classes = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, $mm_classes, $tag, $atts );
 
 	ob_start(); ?>
+
 	<div class="<?php echo $mm_classes; ?>">
-	<?php
-	if ( $user_names ) {
+		<?php
+		if ( $user_names ) {
 
-		// Output component heading.
-		if ( $heading ) {
-			echo '<h3>' . $heading . '</h3>';
+			// Output component heading.
+			if ( $heading ) {
+				echo '<h3>' . $heading . '</h3>';
+			}
+
+			// Output tweets.
+			printf( '[fetch_tweets screen_name="%s" count="%d" template="%s"]',
+				$user_names,
+				$count,
+				$template
+			);
 		}
-
-		// Output tweets.
-		printf( '[fetch_tweets screen_name="%s" count="%d" template="%s"]',
-			$user_names,
-			$count,
-			$template
-		);
-	}
-	?>
+		?>
 	</div>
+
 	<?php
 
 	$output = ob_get_clean();
@@ -104,7 +106,7 @@ function mm_vc_mm_twitter_feed() {
 
 	vc_map( array(
 		'name' => __( 'Twitter Feed', 'mm-add-ons' ),
-		'base' => 'twitter-feed',
+		'base' => 'twitter_feed',
 		'class' => '',
 		'icon' => MM_PLUG_ASSETS_URL . 'component_icon.png',
 		'category' => __( 'Content', 'mm-add-ons' ),

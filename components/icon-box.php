@@ -36,26 +36,26 @@ function mm_icon_box_shortcode( $atts, $content = null, $tag ) {
 
 	<div class="<?php echo $mm_classes; ?>">
 
-	<i class="main-icon <?php echo $atts['icon'] ?>"></i>
+		<i class="main-icon <?php echo $atts['icon'] ?>"></i>
 
-	<?php if ( ! empty( $atts['heading_text'] ) ) : ?>
-		<h3><?php echo $atts['heading_text']; ?></h3>
-	<?php endif; ?>
+		<?php if ( ! empty( $atts['heading_text'] ) ) : ?>
+			<h3><?php echo $atts['heading_text']; ?></h3>
+		<?php endif; ?>
 
-	<?php if ( $content ) : ?>
-		<?php echo $content; ?>
-	<?php endif; ?>
+		<?php if ( $content ) : ?>
+			<?php echo $content; ?>
+		<?php endif; ?>
 
-	<?php
-	if ( ! empty( $atts['link_text'] ) && ! empty( $link_array['url'] ) ) {
-		printf( '<a href="%s" title="%s" target="%s">%s</a>',
-			$link_array['url'],
-			$link_array['title'],
-			$link_array['target'],
-			$atts['link_text']
-		);
-	}
-	?>
+		<?php
+		if ( ! empty( $atts['link_text'] ) && ! empty( $link_array['url'] ) ) {
+			printf( '<a href="%s" title="%s" target="%s">%s</a>',
+				$link_array['url'],
+				$link_array['title'],
+				$link_array['target'],
+				$atts['link_text']
+			);
+		}
+		?>
 
 	</div>
 
@@ -73,6 +73,7 @@ add_action( 'vc_before_init', 'mm_vc_icon_box' );
  * @since  1.0.0
  */
 function mm_vc_icon_box() {
+
 	vc_map( array(
 		'name' => __( 'Icon Box', 'mm-add-ons' ),
 		'base' => 'mm_icon_box',

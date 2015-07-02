@@ -9,7 +9,9 @@
  */
 
 add_action( 'wp_enqueue_scripts', 'mm_countdown_enqueue_scripts' );
-
+/**
+ * Enqueue the countdown script.
+ */
 function mm_countdown_enqueue_scripts() {
 
 	/**
@@ -43,17 +45,17 @@ function mm_countdown_shortcode( $atts, $content = null, $tag ) {
 	wp_enqueue_script( 'mm-countdown' );
 
 	// Get Mm classes
-    $mm_classes = str_replace( '_', '-', $tag );
-    $mm_classes = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, $mm_classes, $tag, $atts );
+	$mm_classes = str_replace( '_', '-', $tag );
+	$mm_classes = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, $mm_classes, $tag, $atts );
 
-    // Create new date object.
-    $date_obj = new DateTime( $date . ' ' . $time . ' ' . $timezone );
-    $utc_date_ojb  = new DateTime( $date . ' ' . $time );
+	// Create new date object.
+	$date_obj = new DateTime( $date . ' ' . $time . ' ' . $timezone );
+	$utc_date_ojb  = new DateTime( $date . ' ' . $time );
 
-    // Get timezone offset.
-    $timezone_offset = $date_obj->getTimezone()->getOffset( $utc_date_ojb ) / 3600;
+	// Get timezone offset.
+	$timezone_offset = $date_obj->getTimezone()->getOffset( $utc_date_ojb ) / 3600;
 
-    // Pass date as comma-separated list.
+	// Pass date as comma-separated list.
 	$year   = $date_obj->format( 'Y' );
 	$month  = $date_obj->format( 'n' );
 	$day    = $date_obj->format( 'j' );
@@ -74,10 +76,6 @@ function mm_countdown_shortcode( $atts, $content = null, $tag ) {
 		$timezone_offset
 	);
 
-	?>
-
-	<?php
-
 	$output = ob_get_clean();
 
 	return $output;
@@ -91,10 +89,10 @@ add_action( 'vc_before_init', 'mm_vc_countdown' );
  */
 function mm_vc_countdown() {
 
-   // Add a custom param for selecting the date
+	// Add a custom param for selecting the date
 	add_shortcode_param( 'date', 'mm_date_param' );
 
-   // Add a custom param for selecting the TimeZone
+	// Add a custom param for selecting the TimeZone
 	add_shortcode_param( 'timezone', 'mm_timezone_param' );
 
 	vc_map( array(
@@ -129,7 +127,7 @@ function mm_vc_countdown() {
 				'value' => '',
 				),
 			)
-) );
+	) );
 }
 
 /**
@@ -139,10 +137,12 @@ function mm_vc_countdown() {
  */
 function mm_date_param( $settings, $value ) {
 
-	$output = '<input type="date" class="countdown-date wpb_vc_param_value" value="' . $value . '" name="' . esc_attr( $settings['param_name'] ) . '" />';
+	$output = sprintf( '<input type="date" class="countdown-date wpb_vc_param_value" value="%s" name="%s" />',
+		$value,
+		esc_attr( $settings['param_name'] )
+	);
 
 	return $output;
-
 }
 
 /**
@@ -189,6 +189,5 @@ function mm_timezone_param( $settings, $value ) {
 	</select>';
 
 	return $output;
-
 }
 

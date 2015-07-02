@@ -8,7 +8,7 @@
  * @since   1.0.0
  */
 
-add_shortcode( 'custom-heading', 'mm_custom_heading_shortcode' );
+add_shortcode( 'custom_heading', 'mm_custom_heading_shortcode' );
 /**
  * Output Custom Heading.
  *
@@ -78,9 +78,10 @@ add_action( 'vc_before_init', 'mm_vc_custom_heading' );
  * @since  1.0.0
  */
 function mm_vc_custom_heading() {
+
 	vc_map( array(
 		'name' => __( 'Custom Heading', 'mm-add-ons' ),
-		'base' => 'custom-heading',
+		'base' => 'custom_heading',
 		'class' => '',
 		'icon' => MM_PLUG_ASSETS_URL . 'component_icon.png',
 		'category' => __( 'Content', 'mm-add-ons' ),
@@ -119,12 +120,6 @@ function mm_vc_custom_heading() {
 				'param_name' => 'font_family',
 				'value' => array(
 					__( 'Default', 'mm-add-ons ') => 'default',
-					__( 'Antenna Condensed Bold', 'mm-add-ons ') => 'antenna-condensed',
-					__( 'Antenna Condensed Black', 'mm-add-ons ') => 'antenna-condensed-black',
-					__( 'Benton Sans Black', 'mm-add-ons ') => 'benton-sans-black',
-					__( 'Benton Sans Bold', 'mm-add-ons ') => 'benton-sans-bold',
-					__( 'Benton Sans Medium', 'mm-add-ons ') => 'benton-sans-medium',
-					__( 'Benton Sans Regular', 'mm-add-ons ') => 'benton-sans',
 				),
 			),
 			array(
@@ -151,29 +146,6 @@ function mm_vc_custom_heading() {
 				'param_name' => 'color',
 				'value' => array(
 					__( 'Default', 'mm-add-ons ') => 'default',
-					__( '-- COLOR --', 'mm-add-ons ') => '',
-					__( 'gogenta', 'mm-add-ons ') => 'gogenta',
-					__( 'gogenta-lite', 'mm-add-ons ') => 'gogenta-lite',
-					__( 'aquaman', 'mm-add-ons ') => 'aquaman',
-					__( 'tomato-splatter', 'mm-add-ons ') => 'tomato-splatter',
-					__( 'danger', 'mm-add-ons ') => 'danger',
-					__( 'orange-dribble', 'mm-add-ons ') => 'orange-dribble',
-					__( 'sizzurp', 'mm-add-ons ') => 'sizzurp',
-					__( 'ninja-turtle', 'mm-add-ons ') => 'ninja-turtle',
-					__( 'icon-sizzurp', 'mm-add-ons ') => 'icon-sizzurp',
-					__( '-- GRAYSCALE --', 'mm-add-ons ') => '',
-					__( 'white', 'mm-add-ons ') => 'white',
-					__( 'filter-grey', 'mm-add-ons ') => 'filter-grey',
-					__( 'background-sizzurp', 'mm-add-ons ') => 'background-sizzurp',
-					__( 'background-warm', 'mm-add-ons ') => 'background-warm',
-					__( 'reload-grey', 'mm-add-ons ') => 'reload-grey',
-					__( 'background-cool', 'mm-add-ons ') => 'background-cool',
-					__( 'line-grey', 'mm-add-ons ') => 'line-grey',
-					__( 'audi-grey', 'mm-add-ons ') => 'audi-grey',
-					__( 'alt-text-grey', 'mm-add-ons ') => 'alt-text-grey',
-					__( 'soft-titanium', 'mm-add-ons ') => 'soft-titanium',
-					__( 'batman-grey', 'mm-add-ons ') => 'batman-grey',
-					__( 'black', 'mm-add-ons ') => 'black',
 				),
 			),
 			array(
@@ -203,5 +175,5 @@ function mm_vc_custom_heading() {
 				'value' => '',
 			),
 		),
-	));
+	) );
 }

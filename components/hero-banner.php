@@ -8,7 +8,7 @@
  * @since   1.0.0
  */
 
-add_shortcode( 'hero-banner', 'mm_hero_banner_shortcode' );
+add_shortcode( 'hero_banner', 'mm_hero_banner_shortcode' );
 /**
  * Output Hero Banner.
  *
@@ -76,7 +76,6 @@ function mm_hero_banner_shortcode( $atts, $content = null, $tag ) {
 
 	<div class="<?php echo $css_classes; ?>" style="<?php echo $style; ?>">
 		<?php
-
 		// Do background overlay.
 		if ( $overlay_color && $overlay_opacity ) {
 			$styles_array = array();
@@ -91,58 +90,59 @@ function mm_hero_banner_shortcode( $atts, $content = null, $tag ) {
 				$styles
 			);
 		}
-
 		?>
+
 		<div class="hero-text-wrapper">
 			<div class="wrapper">
-			<?php if ( $heading ) : ?>
-				<h2><?php echo $heading; ?></h2>
-			<?php endif; ?>
-			<?php if ( $content ) : ?>
-				<p><?php echo $content; ?></p>
-			<?php endif; ?>
-			<?php
-			if ( 'standard' == $button_type && $button_url ) {
+				<?php if ( $heading ) : ?>
+					<h2><?php echo $heading; ?></h2>
+				<?php endif; ?>
+				<?php if ( $content ) : ?>
+					<p><?php echo $content; ?></p>
+				<?php endif; ?>
 
-				echo do_shortcode(
-					sprintf( '[button href="%s" title="%s" target="%s" class="%s"]%s[/button]',
-						$button_url,
-						$button_title,
-						$button_target,
-						$button_classes,
-						$button_text
-					)
-				);
-
-			} elseif ( 'video' == $button_type && $button_video_url ) {
-
-				$video_oEmbed = apply_filters( 'the_content', $button_video_url );
-
-				if ( $video_oEmbed ) {
+				<?php
+				if ( 'standard' == $button_type && $button_url ) {
 
 					echo do_shortcode(
-						sprintf( '[mm-lightbox link_text="%s" class="button %s" lightbox_class="width-wide %s" lightbox_wrap_class="borderless-lightbox"]%s[/mm-lightbox]',
-							$button_text,
+						sprintf( '[button href="%s" title="%s" target="%s" class="%s"]%s[/button]',
+							$button_url,
+							$button_title,
+							$button_target,
 							$button_classes,
-							null,
-							do_shortcode( $video_oEmbed )
+							$button_text
 						)
 					);
 
-				}
+				} elseif ( 'video' == $button_type && $button_video_url ) {
 
-			}
-			?>
-			<?php
-			if ( $secondary_cta ) :
-				/**
-				 * This ridiculous function is modified from Visual Composer
-				 * core (vc-raw-html.php), with the main htmlentities()
-				 * wrapper function removed to allow for including HTML.
-				 */
-			?>
-				<p class="secondary-cta"><?php echo rawurldecode( base64_decode( $secondary_cta ) ); ?></p>
-			<?php endif; ?>
+					$video_oEmbed = apply_filters( 'the_content', $button_video_url );
+
+					if ( $video_oEmbed ) {
+
+						echo do_shortcode(
+							sprintf( '[mm-lightbox link_text="%s" class="button %s" lightbox_class="width-wide %s" lightbox_wrap_class="borderless-lightbox"]%s[/mm-lightbox]',
+								$button_text,
+								$button_classes,
+								null,
+								do_shortcode( $video_oEmbed )
+							)
+						);
+
+					}
+
+				}
+				?>
+				<?php
+				if ( $secondary_cta ) :
+					/**
+					 * This ridiculous function is modified from Visual Composer
+					 * core (vc-raw-html.php), with the main htmlentities()
+					 * wrapper function removed to allow for including HTML.
+					 */
+				?>
+					<p class="secondary-cta"><?php echo rawurldecode( base64_decode( $secondary_cta ) ); ?></p>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
@@ -164,7 +164,7 @@ function mm_vc_hero_banner() {
 
 	vc_map( array(
 		'name' => __( 'Hero Banner', 'mm-add-ons' ),
-		'base' => 'hero-banner',
+		'base' => 'hero_banner',
 		'icon' => MM_PLUG_ASSETS_URL . 'component_icon.png',
 		'category' => __( 'Content', 'mm-add-ons' ),
 		'params' => array(
