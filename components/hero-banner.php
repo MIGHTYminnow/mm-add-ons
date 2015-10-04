@@ -313,7 +313,7 @@ function mm_components_register_hero_banner_widget() {
  *
  * @since  1.0.0
  */
-class Mm_hero_banner_Widget extends Mm_Components_Widget {
+class Mm_Hero_Banner_Widget extends Mm_Components_Widget {
     /**
      * Global options for this widget.
      *
@@ -328,7 +328,7 @@ class Mm_hero_banner_Widget extends Mm_Components_Widget {
     public function __construct() {
         // Set up the options to pass to the WP_Widget constructor.
         $this->options = array(
-            'classname'   => 'mm-hero-banner-strip',
+            'classname'   => 'mm-hero-banner',
             'description' => __( 'A Hero Banner', 'mm-components' ),
         );
         parent::__construct(
@@ -346,6 +346,27 @@ class Mm_hero_banner_Widget extends Mm_Components_Widget {
      * @param  array  $instance  The options for the widget instance.
      */
     public function widget( $args, $instance ) {
+
+        $defaults = array(
+                'background_image'    => '',
+                'background_position' => '',
+                'overlay_color'       => '',
+                'heading'             => '',
+                'paragraph_text'      => '',
+                'text_position'       => '',
+                'button_type'         => '',
+                'button_url'          => '',
+                'video_url'           => '',
+                'heading'             => '',
+                'button_text'         => '',
+                'button_style'        => '',
+                'button_color'        => '',
+                'secondary_cta'       => ''
+            );
+
+        // Use our instance args if they are there, otherwise use the defaults.
+        $instance = wp_parse_args( $instance, $defaults );
+
         // At this point all instance options have been sanitized.
         $background_image     = $instance['background_image'];
         $background_position  = $instance['background_position'];
@@ -361,7 +382,7 @@ class Mm_hero_banner_Widget extends Mm_Components_Widget {
         $button_color         = $instance['button_color'];
         $secondary_cta        = $instance['secondary_cta'];
         $shortcode = sprintf(
-            '[mm_hero_banner title="%s" title_alignment="%s" images="%s" image_size="%s"]',
+            '[mm_hero_banner background_image="%s" background_position="%s" overlay_color="%s" heading="%s" paragraph_text="%s" text_position="%s" button_type="%s" button_url="%s" video_url="%s" button_text="%s" button_style="%s" button_color="%s" secondary_cta="%s"]',
                 $background_image,
                 $background_position,
                 $overlay_color,
