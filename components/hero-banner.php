@@ -309,7 +309,7 @@ function mm_components_register_hero_banner_widget() {
     register_widget( 'mm_hero_banner_widget' );
 }
 /**
- * Highlight box widget.
+ * Hero Banner Widget.
  *
  * @since  1.0.0
  */
