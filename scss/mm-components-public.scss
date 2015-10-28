@@ -560,3 +560,194 @@ a.mm-button {
 		width: 0%;
 	}
 }
+
+/* Grid */
+
+.mm-posts.grid {
+
+	overflow: hidden;
+	float: left;
+
+	article {
+		width: 100%;
+		display: block;
+		vertical-align: top;
+		min-height: 30rem;
+		position: relative;
+	}
+
+	.entry {
+ 		border: 1px solid #e3e3e3;
+	}
+
+	.entry-content {
+		word-wrap: break-word;
+		padding: 1rem 2rem 3rem;
+	}
+
+	.entry-header {
+		padding: 1rem 2rem 0rem;
+	}
+
+	.more-link {
+		position: absolute;
+		width: 100%;
+		padding: 0.5rem 2rem;
+		left: 0;
+		bottom: 0;
+		margin-top: 5rem;
+		border-bottom: none;
+		border-top: 1px solid #e3e3e3;
+	}
+
+	.entry-image img {
+  		max-height: 18rem;
+	}
+
+	@media (min-width: 900px) {
+		article {
+	    width: 48.7%;
+	    display: inline-block;
+	  }
+
+	}
+
+	@media (min-width: 960px) {
+	  article {
+	    width: 48%;
+	  }
+	}
+
+	@media (min-width: 1080px) {
+	  article {
+	    min-height: 42rem;
+	  }
+	}
+
+}
+
+/* Modern */
+
+.mm-posts.modern {
+
+	overflow: hidden;
+	float: left;
+
+	article {
+		position: relative;
+		margin-bottom: 15%;
+	}
+
+	.more-link {
+		position: absolute;
+		left: 0;
+		background-color: #333;
+		color: #fff;
+		margin-top: 54px;
+		padding: 1.5rem 2rem;
+		border-radius: 5px;
+	}
+
+	@media (min-width: 960px) {
+	  article {
+	    margin-bottom: 18%;
+	  }
+	}
+
+}
+
+/* News */
+
+.mm-posts.news {
+	article {
+		width: 100%;
+		display: block;
+		vertical-align: top;
+		position: relative;
+		border: 1px solid #eee;
+		min-height: 30rem;
+		overflow: hidden;
+	}
+
+	.entry {
+		border: 1px solid #e3e3e3;
+	}
+
+	.entry-content {
+ 		word-wrap: break-word;
+	}
+
+	.entry-header {
+		padding: 1rem 2rem 0rem;
+		border-bottom: 1px solid #e3e3e3;
+	}
+
+	.entry-content, .entry-categories {
+  		padding: 1rem 2rem 3rem;
+	}
+
+	.more-link {
+		position: absolute;
+		width: 100%;
+		bottom: 0;
+		padding: 0.5rem 2rem;
+		left: 0;
+		border-bottom: none;
+		border-top: 1px solid #e3e3e3;
+	}
+
+	.post-categories {
+  		display: none;
+	}
+
+	@media (min-width: 768px) {
+	  article {
+	    float: left;
+	    min-height: 25rem;
+	    margin: 0;
+	    border-radius: 0px;
+	  }
+
+	  article:nth-child(5n+1) {
+	    width: 100%;
+	    display: inline-block;
+	  }
+
+	}
+
+	@media (min-width: 960px) {
+
+	  article img {
+	    width: auto;
+	    height: 100px;
+	  }
+
+	  article {
+	    float: left;
+	    min-height: 40rem;
+	    margin: 0;
+	    width: 50%;
+	    border-radius: 0px;
+	  }
+
+	  article:nth-child(5n+1) {
+	    width: 100%;
+	  }
+
+	}
+
+	@media (min-width: 1300px) {
+
+	  article:nth-child(5n+1),
+	  article {
+	    width: 33.3%;
+	  }
+
+	  article:nth-child(4n+1) {
+	    width: 100%;
+	  }
+
+	}
+
+}
+
