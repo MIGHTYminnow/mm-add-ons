@@ -316,7 +316,7 @@ function mm_posts_output_post_info( $post, $context, $args ) {
 			echo '<span class="entry-info">';
 
 			$format = get_option( 'date_format' );
-			$time   = get_the_modified_date( $format );
+			$time   = get_the_date( $format );
 
 			printf(
 				'<time class="%s" itemprop="datePublished">%s</time>',
