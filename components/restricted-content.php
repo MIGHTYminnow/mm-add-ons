@@ -67,15 +67,31 @@ function mm_restricted_content( $args ) {
 		$inner_output = $content;
 	}
 
-	ob_start(); ?>
+	if ( !$valid_user && $other_content === '' ) {
 
-	<div class="<?php echo esc_attr( $mm_classes ); ?>">
-		<div class="mm-restricted-content-inner">
-			<?php echo do_shortcode( $inner_output ); ?>
+		ob_start(); ?>
+
+		<div class="<?php echo esc_attr( $mm_classes ); ?>">
+			<div class="mm-restricted-content-inner">
+				<?php echo do_shortcode( $inner_output ); ?>
+			</div>
 		</div>
-	</div>
 
 	<?php
+
+		} else {
+
+		ob_start(); ?>
+
+		<div class="<?php echo esc_attr( $mm_classes ); ?>">
+			<div class="mm-restricted-content-inner">
+				<?php echo do_shortcode( $inner_output ); ?>
+			</div>
+		</div>
+
+	<?php
+
+	}
 
 	return ob_get_clean();
 }
