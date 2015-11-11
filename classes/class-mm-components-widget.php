@@ -31,7 +31,9 @@ class Mm_Components_Widget extends WP_Widget {
 	 */
 	public function field_text( $label = '', $description = '', $classes = '', $key = '', $value = '' ) {
 
-		echo '<p><label>' . esc_html( $label ) . '</label>';
+		echo '<p class="mm-field-text-wrap">';
+
+			echo '<label>' . esc_html( $label ) . '</label><br />';
 
 			printf(
 				'<input type="text" class="%s" name="%s" value="%s" />',
@@ -57,7 +59,9 @@ class Mm_Components_Widget extends WP_Widget {
 	 */
 	public function field_textarea( $label = '', $description = '', $classes = '', $key = '', $value = '', $rows = '4', $cols = '4' ) {
 
-		echo '<p><label>' . esc_html( $label ) . '</label>';
+		echo '<p class="mm-field-textarea-wrap">';
+
+			echo '<label>' . esc_html( $label ) . '</label><br />';
 
 			printf(
 				'<textarea class="%s" name="%s" rows="%s" cols="%s">%s</textarea>',
@@ -85,7 +89,9 @@ class Mm_Components_Widget extends WP_Widget {
 	 */
 	public function field_select( $label = '', $description = '', $classes = '', $key = '', $value = '', $options = array() ) {
 
-		echo '<p><label>' . esc_html( $label ) . '</label>';
+		echo '<p class="mm-field-select-wrap">';
+
+			echo '<label>' . esc_html( $label ) . '</label><br />';
 
 			printf(
 				'<select class="%s" name="%s">',
@@ -142,7 +148,7 @@ class Mm_Components_Widget extends WP_Widget {
 
 		$val = (int)mm_true_or_false( $value );
 
-		echo '<p>';
+		echo '<p class="mm-field-checkbox-wrap">';
 
 			printf(
 				'<input type="checkbox" class="%s" name="%s" value="1" %s /> <label class="%s">%s</label><br />',
@@ -176,7 +182,9 @@ class Mm_Components_Widget extends WP_Widget {
 			$values = $value;
 		}
 
-		echo '<p><label class="multi-checkbox-group-label">' . esc_html( $label ) . '</label><br />';
+		echo '<p class="mm-field-multi-checkbox-wrap">';
+
+			echo '<label class="multi-checkbox-group-label">' . esc_html( $label ) . '</label><br />';
 
 			echo '<span class="mm-multi-checkbox-wrap">';
 
@@ -243,7 +251,9 @@ class Mm_Components_Widget extends WP_Widget {
 	 */
 	public function field_radio( $label = '', $description = '', $classes = '', $key = '', $value = '', $options = array() ) {
 
-		echo '<p><label class="radio-group-label">' . esc_html( $label ) . '</label><br />';
+		echo '<p class="mm-field-radio-wrap">';
+
+			echo '<label class="radio-group-label">' . esc_html( $label ) . '</label><br />';
 
 			// Test whether we have an associative or indexed array.
 			if ( array_values( $options ) === $options ) {
@@ -310,7 +320,9 @@ class Mm_Components_Widget extends WP_Widget {
 
 		$show_opacity = ( mm_true_or_false( $show_opacity ) ) ? 'true' : 'false';
 
-		echo '<p><label>' . esc_html( $label ) . '</label><br />';
+		echo '<p class="mm-field-alpha-color-picker-wrap">';
+
+			echo '<label>' . esc_html( $label ) . '</label><br />';
 
 			printf(
 				'<input class="%s" type="text" name="%s" value="%s" data-palette="%s" data-show-opacity="%s" data-default-color="%s" />',
@@ -345,7 +357,9 @@ class Mm_Components_Widget extends WP_Widget {
 			$image = '';
 		}
 
-		echo '<p><label>' . esc_html( $label ) . '</label><br />';
+		echo '<p class="mm-field-single-media-wrap">';
+
+			echo '<label>' . esc_html( $label ) . '</label><br />';
 
 			?>
 			<span class="mm-single-media-wrap">
@@ -386,7 +400,9 @@ class Mm_Components_Widget extends WP_Widget {
 			$images = array();
 		}
 
-		echo '<p><label>' . esc_html( $label ) . '</label><br />';
+		echo '<p class="mm-field-multi-media-wrap">';
+
+			echo '<label>' . esc_html( $label ) . '</label><br />';
 
 			?>
 			<span class="mm-multi-media-wrap">
@@ -430,7 +446,7 @@ class Mm_Components_Widget extends WP_Widget {
 	 */
 	public function field_custom( $label = '', $description = '', $output = '' ) {
 
-		echo '<p>';
+		echo '<p class="mm-field-custom-wrap">';
 
 			echo '<label>' . esc_html( $label ) . '</label><br />';
 
