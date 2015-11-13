@@ -129,7 +129,7 @@ function mm_vc_restricted_content() {
 	vc_map( array(
 		'name'         => __( 'Restricted Content', 'mm-components' ),
 		'base'         => 'mm_restricted_content',
-		'icon'         => MM_COMPONENTS_ASSETS_URL . 'component_icon.png',
+		'icon'         => MM_COMPONENTS_ASSETS_URL . 'restricted-content_icon.png',
 		'as_parent'    => array( 'except' => '' ),
 		'is_container' => true,
 		'params' => array(
@@ -167,8 +167,8 @@ function mm_vc_restricted_content() {
 
 // This is necessary to make any element that wraps other elements work.
 if ( class_exists( 'WPBakeryShortCodesContainer' ) ) {
-    class WPBakeryShortCode_MM_Restricted_Content extends WPBakeryShortCodesContainer {
-    }
+	class WPBakeryShortCode_MM_Restricted_Content extends WPBakeryShortCodesContainer {
+	}
 }
 
 add_action( 'widgets_init', 'mm_components_register_restricted_content_widget' );

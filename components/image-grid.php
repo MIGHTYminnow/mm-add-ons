@@ -199,7 +199,7 @@ function mm_vc_image_grid() {
 		'as_parent'               => array( 'only' => 'mm_image_grid_image' ),
 		'content_element'         => true,
 		'class'                   => 'image-grid',
-      	'icon'                    => MM_COMPONENTS_ASSETS_URL . 'component_icon.png',
+		  'icon'                    => MM_COMPONENTS_ASSETS_URL . 'image-grid_icon.png',
 		'show_settings_on_create' => false,
 		'params' => array(
 			array(
@@ -241,7 +241,7 @@ function mm_vc_image_grid() {
 		'name'            => __( 'Image Grid Image', 'mm-components' ),
 		'base'            => 'mm_image_grid_image',
 		'content_element' => true,
-      	'icon'            => MM_COMPONENTS_ASSETS_URL . 'component_icon.png',
+		  'icon'            => MM_COMPONENTS_ASSETS_URL . 'component_icon.png',
 		'as_child'        => array( 'only' => 'mm_image_grid' ),
 		'params'          => array(
 			array(
@@ -276,7 +276,7 @@ function mm_vc_image_grid() {
 	) );
 
 	// These are necessary to get the element nesting to work.
- 	if ( class_exists( 'WPBakeryShortCodesContainer' ) ) {
+	 if ( class_exists( 'WPBakeryShortCodesContainer' ) ) {
 		class WPBakeryShortCode_Mm_Image_Grid extends WPBakeryShortCodesContainer {
 		}
 	}

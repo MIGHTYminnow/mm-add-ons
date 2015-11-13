@@ -80,7 +80,7 @@ function mm_vc_expandable_content() {
 	vc_map( array(
 		'name'         => __( 'Expandable Content', 'mm-components' ),
 		'base'         => 'mm_expandable_content',
-		'icon'         => MM_COMPONENTS_ASSETS_URL . 'component_icon.png',
+		'icon'         => MM_COMPONENTS_ASSETS_URL . 'expandable-content_icon.png',
 		'as_parent'    => array( 'except' => '' ),
 		'is_container' => true,
 		'params' => array(
@@ -136,6 +136,6 @@ function mm_vc_expandable_content() {
 
 // This is necessary to make any element that wraps other elements work.
 if ( class_exists( 'WPBakeryShortCodesContainer' ) ) {
-    class WPBakeryShortCode_MM_Expandable_Content extends WPBakeryShortCodesContainer {
-    }
+	class WPBakeryShortCode_MM_Expandable_Content extends WPBakeryShortCodesContainer {
+	}
 }

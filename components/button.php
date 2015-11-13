@@ -84,11 +84,11 @@ function mm_button( $args ) {
 	if ( ! empty( $args['color'] ) ) {
 		$classes[] = $args['color'];
 	}
-	if( ! empty( $args['size'] ) ) {
+	if ( ! empty( $args['size'] ) ) {
 		$classes[] = $args['size'];
 	}
-	if( ! empty( $args['full_width'] ) ) {
-		$classes[] = $args['full_width'];
+	if ( ! empty( $args['full_width'] ) && mm_true_or_false( 1 ) ) {
+		$classes[] = 'full-width';
 	}
 
 	$classes = implode( ' ', $classes );
