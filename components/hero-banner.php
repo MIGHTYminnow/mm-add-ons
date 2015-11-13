@@ -8,19 +8,12 @@
  * @since   1.0.0
  */
 
-add_shortcode( 'mm_hero_banner', 'mm_hero_banner_shortcode' );
-/**
- * Output Hero Banner.
- *
- * @since   1.0.0
- *
- * @param   array  $atts  Shortcode attributes.
- *
- * @return  string        Shortcode output.
- */
-function mm_hero_banner_shortcode( $atts, $content = null, $tag ) {
+function mm_hero_banner( $args ) {
 
-	extract( mm_shortcode_atts( array(
+	$component = 'mm-hero-banner';
+
+	// Set our defaults and use them as needed.
+	$defaults = array(
 		'background_image'    => '',
 		'background_position' => 'center center',
 		'overlay_color'       => '',
@@ -35,31 +28,50 @@ function mm_hero_banner_shortcode( $atts, $content = null, $tag ) {
 		'button_style'        => '',
 		'button_color'        => '',
 		'secondary_cta'       => '',
-	), $atts ) );
+	);
 
-	// Handle a raw link or a VC link array.
+	$args = wp_parse_args( (array)$args, $defaults );
+
+	// Get clean param values.
+	$background_image     = $args['background_image'];
+	$background_position  = $args['background_position'];
+	$overlay_color        = $args['overlay_color'];
+	$overlay_opacity      = $args['overlay_opacity'];
+	$heading              = $args['heading'];
+	$text_position        = $args['text_position'];
+	$button_type          = $args['button_type'];
+	$button_link          = $args['button_link'];
+	$button_link_target   = $args['button_link_target'];
+	$button_video_url     = $args['button_video_url'];
+	$button_text          = $args['button_text'];
+	$button_style         = $args['button_style'];
+	$button_color         = $args['button_color'];
+	$secondary_cta        = $args['secondary_cta'];
+
+
 	$button_url    = '';
 	$button_title  = '';
 	$button_target = '';
 
-	if ( ! empty( $atts['button_link'] ) ) {
+	if ( ! empty( $button_link ) ) {
 
-		if ( 'url' === substr( $atts['button_link'], 0, 3 ) ) {
+		if ( 'url' === substr( $button_link, 0, 3 ) ) {
 
 			if ( function_exists( 'vc_build_link' ) ) {
 
-				$link_array  = vc_build_link( $atts['button_link'] );
+				$link_array  = vc_build_link( $button_link );
 				$button_url    = $link_array['url'];
 				$button_title  = $link_array['title'];
 				$button_target = $link_array['target'];
+
+			} else {
+
+				$button_url    = $button_link;
+				$button_title  = $button_text;
+				$button_target = $button_link_target;
 			}
-
-		} else {
-
-			$button_url    = $atts['button_link'];
-			$button_title  = $atts['button_text'];
-			$button_target = $atts['button_link_target'];
 		}
+
 	}
 
 	// Get button classes.
@@ -67,10 +79,8 @@ function mm_hero_banner_shortcode( $atts, $content = null, $tag ) {
 	$button_classes .= ' ' . $button_style;
 	$button_classes .= ' ' . $button_color;
 
-	// Get CSS classes.
-	$css_classes = apply_filters( 'mm_components_custom_classes', '', $tag, $atts );
-	$css_classes .= ' full-width';
-	$css_classes .= ' ' . $text_position;
+	// Get MM classes.
+	$mm_classes = apply_filters( 'mm_components_custom_classes', '', $component, $args );
 
 	/**
 	 * Parse images.
@@ -171,6 +181,23 @@ function mm_hero_banner_shortcode( $atts, $content = null, $tag ) {
 	$output = ob_get_clean();
 
 	return $output;
+
+}
+
+add_shortcode( 'mm_hero_banner', 'mm_hero_banner_shortcode' );
+/**
+ * Output Hero Banner.
+ *
+ * @since   1.0.0
+ *
+ * @param   array  $atts  Shortcode attributes.
+ *
+ * @return  string        Shortcode output.
+ */
+function mm_hero_banner_shortcode( $atts ) {
+
+	return mm_hero_banner( $atts );
+
 }
 
 add_action( 'vc_before_init', 'mm_vc_hero_banner' );
@@ -317,3 +344,14 @@ function mm_vc_hero_banner() {
 		),
 	) );
 }
+
+//add_action( 'widgets_init', 'mm_components_register_hero_banner_widget' );
+/**
+ * Register the widget.
+ *
+ * @since  1.0.0
+ */
+/**function mm_components_register_hero_banner_widget() {
+
+	register_widget( 'mm_hero_banner_widget' );
+}**/
