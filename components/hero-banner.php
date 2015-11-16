@@ -521,6 +521,8 @@ class Mm_Hero_Banner_Widget extends Mm_Components_Widget {
 		$button_color         = $instance['button_color'];
 		$secondary_cta        = $instance['secondary_cta'];
 
+		$classname          = $this->options['classname'];
+
 		// Background Image.
 		$this->field_single_media(
 			__( 'Background Image:', 'mm-components' ),
@@ -548,6 +550,128 @@ class Mm_Hero_Banner_Widget extends Mm_Components_Widget {
 			$overlay_color,
 			mm_get_available_overlay_colors( 'hero-banner' )
 		);
+
+		// Overlay Opacity.
+		$this->field_select(
+			__( 'Overlay Opacity', 'mm-components' ),
+			'',
+			$classname . '-overlay-opacity widefat',
+			'overlay_opacity',
+			$overlay_opacity,
+			array(
+				'0.1',
+				'0.2',
+				'0.3',)
+		);
+
+		// Heading.
+		$this->field_text(
+			__( 'Heading', 'mm-components' ),
+			'',
+			$classname . '-heading widefat',
+			'heading',
+			$heading
+		);
+
+		// Content.
+		$this->field_textarea(
+			__( 'Content', 'mm-components' ),
+			'',
+			$classname . '-content widefat',
+			'content',
+			$content
+		);
+
+		// Text Position.
+		$this->field_select(
+			__( 'Text Position', 'mm-components' ),
+			'',
+			$classname . '-text-position widefat',
+			'text_position',
+			$text_position,
+			array(
+				'left'   => 'Left',
+				'center' => 'Center',
+				'right'  => 'Right',
+				)
+		);
+
+		// Button Type.
+		$this->field_select(
+			__( 'Button Type', 'mm-components' ),
+			'',
+			$classname . '-button-type widefat',
+			'button_type',
+			$button_type,
+			array(
+				'standard' => 'Standard',
+				'video'    => 'Video',
+				)
+		);
+
+		// Button Link.
+		$this->field_text(
+			__( 'Button Link', 'mm-components' ),
+			'',
+			$classname . '-button-link widefat',
+			'button_link',
+			$button_link
+		);
+
+		// Button Video URL.
+		$this->field_text(
+			__( 'Button Video URL', 'mm-components' ),
+			'',
+			$classname . '-button-video-url widefat',
+			'button_video_url',
+			$button_video_url
+		);
+
+		// Button Text.
+		$this->field_text(
+			__( 'Button Text', 'mm-components' ),
+			'',
+			$classname . '-button-text widefat',
+			'button_text',
+			$button_text
+		);
+
+		// Button Style.
+		$this->field_select(
+			__( 'Button Style', 'mm-components' ),
+			'',
+			$classname . '-button-style widefat',
+			'button_style',
+			$button_style,
+			array(
+				'default' => 'Default (solid)',
+				'ghost'   => 'Ghost (transparent background, white border)',
+				)
+		);
+
+		// Button Color.
+		$this->field_select(
+			__( 'Button Color', 'mm-components' ),
+			'',
+			$classname . '-button-color widefat',
+			'button_color',
+			$button_color,
+			array(
+				'default' => 'Default',
+				'pink'    => 'Pink',
+				'white'   => 'White',
+				'gray'    => 'Gray',
+				)
+		);
+
+		// Secondary CTA.
+		$this->field_textarea(
+			__( 'Secondary CTA', 'mm-components' ),
+			'',
+			$classname . '-secondary-cta widefat',
+			'secondary_cta',
+			$secondary_cta
+		);
 	}
 
 	/**
@@ -563,7 +687,7 @@ class Mm_Hero_Banner_Widget extends Mm_Components_Widget {
 	public function update( $new_instance, $old_instance ) {
 
 		$instance = $old_instance;
-		$instance['background_image']    = $new_instance['background_image'];
+		$instance['background_image']    = sanitize_text_field( $new_instance['background_image'] );
 		$instance['background_position'] = sanitize_text_field( $new_instance['background_position'] );
 		$instance['overlay_color']       = wp_kses_post( $new_instance['overlay_color'] );
 		$instance['overlay_opacity']     = wp_kses_post( $new_instance['overlay_opacity'] );

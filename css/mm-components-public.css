@@ -486,6 +486,7 @@ a.mm-button.full-width {
     .hero-banner .button.ghost {
         padding-top: 0.32em;
         padding-bottom: 0.32em;
+        background-color: transparent !important;
     }
 
 }
