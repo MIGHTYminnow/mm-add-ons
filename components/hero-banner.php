@@ -21,7 +21,7 @@ function mm_hero_banner( $args ) {
 		'heading'             => '',
 		'content'             => '',
 		'text_position'       => 'left',
-		'button_type'         => '',
+		'button_type'         => 'standard',
 		'button_link'         => '',
 		'button_link_target'  => '',
 		'button_video_url'    => '',
@@ -55,7 +55,10 @@ function mm_hero_banner( $args ) {
 
 	// Setup button classes.
 	$button_classes = array();
-	$button_classes[] = 'mm-hero-banner';
+	$button_classes[] = 'mm-button';
+	if ( ! empty( $args['button_type'] ) ) {
+		$button_classes[] = $args['button_type'];
+	}
 	if ( ! empty( $args['button_type'] ) ) {
 		$button_classes[] = $args['button_type'];
 	}
@@ -142,16 +145,18 @@ function mm_hero_banner( $args ) {
 					}
 				}
 
-				if ( $button_url ) {
+				if ( 'standard' == $button_type && $button_url ) {
 
-					echo do_shortcode(
-					printf(
-						'[mm_button link="%s" class="%s"]%s[/mm_button]',
+
+					$button = printf(
+						'<a class="%s" href="%s" target="%s">%s</a>',
+						esc_attr( $button_classes ),
 						$button_url,
-						$button_classes,
+						$button_target,
 						$button_text
-					)
-				);
+					);
+
+					$button;
 
 				} elseif ( 'video' == $button_type && $button_video_url ) {
 
