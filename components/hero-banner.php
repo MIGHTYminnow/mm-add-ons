@@ -53,6 +53,9 @@ function mm_hero_banner( $args ) {
 	$button_title  = '';
 	$button_target = '';
 
+	// Build the alignment class.
+	$alignment = 'mm-text-align-' . $args['text_position'];
+
 	// Setup button classes.
 	$button_classes = array();
 	$button_classes[] = 'mm-button';
@@ -95,7 +98,7 @@ function mm_hero_banner( $args ) {
 
 	ob_start(); ?>
 
-	<div class="<?php echo $css_classes; ?>" style="<?php echo $style; ?>">
+	<div class="<?php echo $alignment; ?>" style="<?php echo $style; ?>">
 		<?php
 		// Do background overlay.
 		if ( $overlay_color && $overlay_opacity ) {
@@ -287,9 +290,9 @@ function mm_vc_hero_banner() {
 				'heading' => __( 'Text Position', 'mm-components' ),
 				'param_name' => 'text_position',
 				'value' => array(
-					__( 'Left', 'mm-components' ) => 'text-left',
-					__( 'Center', 'mm-components' ) => 'text-center',
-					__( 'Right', 'mm-components' ) => 'text-right',
+					__( 'Left', 'mm-components' ) => 'left',
+					__( 'Center', 'mm-components' ) => 'center',
+					__( 'Right', 'mm-components' ) => 'right',
 				),
 			),
 			array(
