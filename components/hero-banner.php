@@ -54,32 +54,32 @@ function mm_hero_banner( $args ) {
 	$button_target = '';
 
 	// Setup button classes.
-	$classes = array();
-	$classes[] = 'mm-hero-banner';
-	if ( ! empty( $args['class'] ) ) {
-		$classes[] = $args['class'];
-	}
+	$button_classes = array();
+	$button_classes[] = 'mm-hero-banner';
 	if ( ! empty( $args['button_type'] ) ) {
-		$classes[] = $args['button_type'];
+		$button_classes[] = $args['button_type'];
 	}
 	if ( ! empty( $args['button_link'] ) ) {
-		$classes[] = $args['button_link'];
+		$button_classes[] = $args['button_link'];
 	}
 	if ( ! empty( $args['button_link_target'] ) ) {
-		$classes[] = $args['button_link_target'];
+		$button_classes[] = $args['button_link_target'];
 	}
 	if ( ! empty( $args['button_video_url'] ) ) {
-		$classes[] = $args['button_video_url'];
+		$button_classes[] = $args['button_video_url'];
 	}
 	if( ! empty( $args['button_text'] ) ) {
-		$classes[] = $args['button_text'];
+		$button_classes[] = $args['button_text'];
 	}
 	if( ! empty( $args['button_style'] ) ) {
-		$classes[] = $args['button_style'];
+		$button_classes[] = $args['button_style'];
 	}
 	if( ! empty( $args['button_color'] ) ) {
-		$classes[] = $args['button_color'];
+		$button_classes[] = $args['button_color'];
 	}
+
+	$button_classes = implode( ' ', $button_classes );
+
 	// Get MM classes.
 	$mm_classes = apply_filters( 'mm_components_custom_classes', '', $component, $args );
 
@@ -154,10 +154,10 @@ function mm_hero_banner( $args ) {
 					}
 				}
 
-				if ( 'standard' == $button_type && $button_url ) {
+				if ( $button_url ) {
 
 					echo do_shortcode(
-						sprintf( '[button href="%s" title="%s" target="%s" class="%s"]%s[/button]',
+						printf( '[mm_button href="%s" title="%s" target="%s" class="%s"]%s[/mm_button]',
 							$button_url,
 							$button_title,
 							$button_target,
@@ -173,7 +173,7 @@ function mm_hero_banner( $args ) {
 					if ( $video_oEmbed ) {
 
 						echo do_shortcode(
-							sprintf( '[mm-lightbox link_text="%s" class="button %s" lightbox_class="width-wide %s" lightbox_wrap_class="borderless-lightbox"]%s[/mm-lightbox]',
+							printf( '[mm-lightbox link_text="%s" class="button %s" lightbox_class="width-wide %s" lightbox_wrap_class="borderless-lightbox"]%s[/mm-lightbox]',
 								$button_text,
 								$button_classes,
 								null,
