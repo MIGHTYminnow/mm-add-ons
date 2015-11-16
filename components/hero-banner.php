@@ -53,26 +53,6 @@ function mm_hero_banner( $args ) {
 	$button_title  = '';
 	$button_target = '';
 
-	if ( ! empty( $button_link ) ) {
-
-		if ( 'url' === substr( $button_link, 0, 3 ) ) {
-
-			if ( function_exists( 'vc_build_link' ) ) {
-
-				$link_array    = vc_build_link( $button_link );
-				$button_url    = $link_array['url'];
-				$button_title  = $link_array['title'];
-				$button_target = $link_array['target'];
-			}
-
-		} else {
-
-			$button_url    = $button_link;
-			$button_title  = $button_text;
-			$button_target = $button_link_target;
-		}
-	}
-
 	// Setup button classes.
 	$classes = array();
 	$classes[] = 'mm-hero-banner';
@@ -153,6 +133,27 @@ function mm_hero_banner( $args ) {
 				<?php endif; ?>
 
 				<?php
+
+				if ( ! empty( $button_link ) ) {
+
+					if ( 'url' === substr( $button_link, 0, 3 ) ) {
+
+						if ( function_exists( 'vc_build_link' ) ) {
+
+							$link_array    = vc_build_link( $button_link );
+							$button_url    = $link_array['url'];
+							$button_title  = $link_array['title'];
+							$button_target = $link_array['target'];
+						}
+
+					} else {
+
+						$button_url    = $button_link;
+						$button_title  = $button_text;
+						$button_target = $button_link_target;
+					}
+				}
+
 				if ( 'standard' == $button_type && $button_url ) {
 
 					echo do_shortcode(
@@ -219,7 +220,7 @@ add_shortcode( 'mm_hero_banner', 'mm_hero_banner_shortcode' );
 function mm_hero_banner_shortcode( $atts = array(), $content = null ) {
 
 	if ( $content ) {
-		$atts['restricted_content'] = $content;
+		$atts['content'] = $content;
 	}
 
 	return mm_hero_banner( $atts );
@@ -377,7 +378,7 @@ add_action( 'widgets_init', 'mm_components_register_hero_banner_widget' );
  *
  * @since  1.0.0
  */
-function mm_components_register_restricted_content_widget() {
+function mm_components_register_hero_banner_widget() {
 
 	register_widget( 'mm_hero_banner_widget' );
 }
@@ -387,7 +388,7 @@ function mm_components_register_restricted_content_widget() {
  *
  * @since  1.0.0
  */
-class Mm_Restricted_Content_Widget extends Mm_Components_Widget {
+class Mm_Hero_Banner_Widget extends Mm_Components_Widget {
 
 	/**
 	 * Global options for this widget.
@@ -540,7 +541,7 @@ class Mm_Restricted_Content_Widget extends Mm_Components_Widget {
 			__( 'CSS background position value (<a href="http://www.w3schools.com/cssref/pr_background-position.asp">read more</a>). Defaults to: center center.', 'mm-components' ),
 			$classname . '-specific-roles widefat',
 			'background_position',
-			$background_position,
+			$background_position
 		);
 
 		// Overlay Color.
@@ -550,7 +551,7 @@ class Mm_Restricted_Content_Widget extends Mm_Components_Widget {
 			$classname . '-overlay_color widefat',
 			'overlay_color',
 			$overlay_color,
-			mm_get_available_overlay_colors( 'hero-banner' ),
+			mm_get_available_overlay_colors( 'hero-banner' )
 		);
 	}
 
@@ -567,21 +568,21 @@ class Mm_Restricted_Content_Widget extends Mm_Components_Widget {
 	public function update( $new_instance, $old_instance ) {
 
 		$instance = $old_instance;
-		$instance['background_image'];    = $new_instance['background_image'];
-		$instance['background_position']; = sanitize_text_field( $new_instance['background_position'] );
-		$instance['overlay_color'];       = wp_kses_post( $new_instance['overlay_color'] );
-		$instance['overlay_opacity'];     = wp_kses_post( $new_instance['overlay_opacity'] );
-		$instance['heading'];             = sanitize_text_field( $new_instance['heading'] )
-		$instance['content'];             = wp_kses_post( $new_instance['content'] )
-		$instance['text_position'];       = sanitize_text_field( $new_instance['text_position'] );
-		$instance['button_type'];         = sanitize_text_field( $new_instance['button_type'] );
-		$instance['button_link'];         = sanitize_text_field( $new_instance['button_link'] );
-		$instance['button_link_target'];  = sanitize_text_field( $new_instance['button_link_target'] );
-		$instance['button_video_url'];    = sanitize_text_field( $new_instance['button_video_url'] );
-		$instance['button_text'];         = sanitize_text_field( $new_instance['button_text'] );
-		$instance['button_style'];        = sanitize_text_field( $new_instance['button_style'] );
-		$instance['button_color'];        = sanitize_text_field( $new_instance['button_color'] );
-		$instance['secondary_cta'];       = wp_kses_post( $new_instance['secondary_cta'] );
+		$instance['background_image']    = $new_instance['background_image'];
+		$instance['background_position'] = sanitize_text_field( $new_instance['background_position'] );
+		$instance['overlay_color']       = wp_kses_post( $new_instance['overlay_color'] );
+		$instance['overlay_opacity']     = wp_kses_post( $new_instance['overlay_opacity'] );
+		$instance['heading']             = sanitize_text_field( $new_instance['heading'] );
+		$instance['content']             = wp_kses_post( $new_instance['content'] );
+		$instance['text_position']       = sanitize_text_field( $new_instance['text_position'] );
+		$instance['button_type']         = sanitize_text_field( $new_instance['button_type'] );
+		$instance['button_link']         = sanitize_text_field( $new_instance['button_link'] );
+		$instance['button_link_target']  = sanitize_text_field( $new_instance['button_link_target'] );
+		$instance['button_video_url']    = sanitize_text_field( $new_instance['button_video_url'] );
+		$instance['button_text']         = sanitize_text_field( $new_instance['button_text'] );
+		$instance['button_style']        = sanitize_text_field( $new_instance['button_style'] );
+		$instance['button_color']        = sanitize_text_field( $new_instance['button_color'] );
+		$instance['secondary_cta']       = wp_kses_post( $new_instance['secondary_cta'] );
 
 		return $instance;
 	}
