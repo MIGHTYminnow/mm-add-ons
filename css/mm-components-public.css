@@ -445,6 +445,12 @@ a.mm-button.full-width {
     display: block;
   }
 
+  .mm-logo-strip .logo img {
+    display: block;
+    max-width: 50%;
+    margin: 1.5rem auto;
+  }
+
 @media (min-width: 600px) {
 
   .mm-logo-strip .logo {
@@ -455,6 +461,8 @@ a.mm-button.full-width {
   .mm-logo-strip .logo img {
     display: block;
     max-height: 50px;
+    max-width: 100%;
+    margin: 0;
   }
 }
 
