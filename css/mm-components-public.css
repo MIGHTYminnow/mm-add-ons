@@ -80,7 +80,7 @@ a.mm-button {
   color: #fff !important;
 }
 
-a.mm-button:hover {
+a.mm-button:hover  {
   background-color: #55aaaa;
 }
 
@@ -93,7 +93,7 @@ a.mm-button.ghost.thin, a.mm-button.solid-to-ghost.thin {
   border: 1px solid;
 }
 
-a.mm-button.ghost.thick, a.mm-button.solid-to-ghost.thick {
+a.mm-button.ghost.thick, a.mm-button.solid-to-ghost.thick, {
   border: 2px solid;
 }
 
@@ -455,6 +455,30 @@ a.mm-button.full-width {
     font-weight: normal;*/
 }
 
+.hero-banner a.mm-button {
+  display: inline-block;
+  padding: 15px 25px;
+  border-bottom: none;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  background-color: #99CCCC;
+  color: #fff !important;
+}
+
+.hero-banner a.mm-button:hover  {
+  background-color: #55aaaa !important;
+  border-color: #55aaaa;
+}
+
+.hero-banner a.mm-button:hover {
+  text-decoration: none;
+}
+
+.hero-banner a.mm-button.ghost {
+  border: 1px solid;
+  background-color: transparent;
+}
+
 .hero-banner .secondary-cta {
     margin-top: 1.5em;
     margin-bottom: 0 !important;
@@ -466,14 +490,6 @@ a.mm-button.full-width {
 
 .hero-banner .secondary-cta a:hover {
     opacity: 0.8;
-}
-
-@media (min-width: 480px) {
-
-    .hero-banner .wrapper {
-        max-width: 65%;
-    }
-
 }
 
 @media (max-width: 599px) {
@@ -494,7 +510,6 @@ a.mm-button.full-width {
 @media (min-width: 600px) {
 
     .hero-banner .wrapper {
-        max-width: 455px;
         min-height: 400px;
         margin: 0 6%;
         padding: 108px 0 116px;

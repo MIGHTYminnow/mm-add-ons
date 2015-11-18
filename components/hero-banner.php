@@ -53,15 +53,14 @@ function mm_hero_banner( $args ) {
 	$button_title  = '';
 	$button_target = '';
 
-	// Build the alignment class.
-	$alignment = 'mm-text-align-' . $args['text_position'];
+	// Build the CSS classes.
+	$css_classes = 'mm-text-align-' . $args['text_position'];
+	$css_classes .= ' full-width';
+
 
 	// Setup button classes.
 	$button_classes = array();
 	$button_classes[] = 'mm-button';
-	if ( ! empty( $args['button_type'] ) ) {
-		$button_classes[] = $args['button_type'];
-	}
 	if ( ! empty( $args['button_type'] ) ) {
 		$button_classes[] = $args['button_type'];
 	}
@@ -96,100 +95,140 @@ function mm_hero_banner( $args ) {
 	$style = "background-image: url($image);";
 	$style .= " background-position: $background_position;";
 
-	ob_start(); ?>
+	// Do background overlay.
+	if ( $overlay_color && $overlay_opacity ) {
+		$styles_array = array();
+		$styles_array[] = "background-color: $overlay_color;";
+		$styles_array[] = "opacity: $overlay_opacity;";
 
-	<div class="<?php echo $alignment; ?>" style="<?php echo $style; ?>">
-		<?php
-		// Do background overlay.
-		if ( $overlay_color && $overlay_opacity ) {
-			$styles_array = array();
-			$styles_array[] = "background-color: $overlay_color;";
-			$styles_array[] = "opacity: $overlay_opacity;";
+		$overlay_opacity_ie = $overlay_opacity * 100;
+		$styles_array[] = "filter: alpha(opacity=$overlay_opacity_ie);";
+		$styles = implode( ' ', $styles_array );
 
-			$overlay_opacity_ie = $overlay_opacity * 100;
-			$styles_array[] = "filter: alpha(opacity=$overlay_opacity_ie);";
-			$styles = implode( ' ', $styles_array );
+		$overlay = '<div class="color-overlay" style="' . $styles . '"></div>';
 
-			printf(
-				'<div class="color-overlay" style="%s"></div>',
-				$styles
-			);
+	}
+
+	// Output the heading.
+	if ( $heading ) {
+		$heading_output = '<h2>' . $heading . '</h2>';
+	}
+
+	// Output the content.
+	if ( $content ) {
+		$content_output = '<p>' . $content . '</p>';
+	}
+
+	// Check for VC button.
+	if ( ! empty( $button_link ) ) {
+
+		if ( 'url' === substr( $button_link, 0, 3 ) ) {
+
+			if ( function_exists( 'vc_build_link' ) ) {
+
+				$link_array    = vc_build_link( $button_link );
+				$button_url    = $link_array['url'];
+				$button_title  = $link_array['title'];
+				$button_target = $link_array['target'];
+			}
+
+		} else {
+
+			$button_url    = $button_link;
+			$button_title  = $button_text;
+			$button_target = $button_link_target;
 		}
-		?>
+	}
 
-		<div class="hero-text-wrapper">
-			<div class="wrapper">
-				<?php if ( $heading ) : ?>
-					<h2><?php echo $heading; ?></h2>
-				<?php endif; ?>
-				<?php if ( $content ) : ?>
-					<p><?php echo $content; ?></p>
-				<?php endif; ?>
+	$button_output = '';
+	$video_oEmbed_output = '';
 
-				<?php
+	// Get lightbox classes
+	$lightbox_classes = str_replace( '_', '-', $component );
+	$lightbox_classes = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, $lightbox_classes, $component, $args );
+	$lightbox_classes .= " width";
 
-				if ( ! empty( $button_link ) ) {
+	// Get link classes.
+	$link_classes = '';
+	$link_classes .= ' ' . $button_style;
+	$link_classes .= ' ' . $button_color;
 
-					if ( 'url' === substr( $button_link, 0, 3 ) ) {
+	//Output the button.
+	if ( 'standard' == $button_type && $button_url ) {
 
-						if ( function_exists( 'vc_build_link' ) ) {
-
-							$link_array    = vc_build_link( $button_link );
-							$button_url    = $link_array['url'];
-							$button_title  = $link_array['title'];
-							$button_target = $link_array['target'];
-						}
-
-					} else {
-
-						$button_url    = $button_link;
-						$button_title  = $button_text;
-						$button_target = $button_link_target;
-					}
-				}
-
-				if ( 'standard' == $button_type && $button_url ) {
-
-
-					$button = printf(
-						'<a class="%s" href="%s" target="%s">%s</a>',
-						esc_attr( $button_classes ),
-						$button_url,
-						$button_target,
-						$button_text
-					);
-
-					$button;
-
-				} elseif ( 'video' == $button_type && $button_video_url ) {
-
-					$video_oEmbed = apply_filters( 'the_content', $button_video_url );
-
-					if ( $video_oEmbed ) {
-
-						echo do_shortcode(
-							printf( '[mm-lightbox link_text="%s" class="button %s" lightbox_class="width-wide %s" lightbox_wrap_class="borderless-lightbox"]%s[/mm-lightbox]',
-								$button_text,
-								$button_classes,
-								null,
-								do_shortcode( $video_oEmbed )
-							)
+		$button_output = sprintf( '[button href="%s" target="%s" class="%s"]%s[/button]',
+							$button_url,
+							$button_target,
+							esc_attr( $button_classes ),
+							$button_text
 						);
 
-					}
+	} else {
 
-				}
-				?>
-				<?php
-				if ( $secondary_cta ) :
-					/**
+		'' == $button_output;
+	}
+
+	if ( 'video' == $button_type && $button_video_url ) {
+
+		$video_oEmbed = apply_filters( 'the_content', $button_video_url );
+
+		if ( $video_oEmbed ) {
+
+			$video_oEmbed_output = sprintf( '[igg-lightbox link_text="%s" class="%s" lightbox_class="%s"]%s[/igg-lightbox]',
+									$button_video_url,
+									$link_classes,
+									$lightbox_classes,
+									do_shortcode( $video_oEmbed )
+									);
+			}
+
+		}
+
+	$secondary_cta_output  = '';
+
+		if ( strpos( $secondary_cta, '<' ) ) {
+
+			/* We have HTML */
+			$secondary_cta_output = ( function_exists( 'wpb_js_remove_wpautop' ) ) ? wpb_js_remove_wpautop( $secondary_cta, true ) : $secondary_cta;
+
+		} elseif ( mm_is_base64( $secondary_cta ) ) {
+
+			/* We have a base64 encoded string */
+			$secondary_cta_output = rawurldecode( base64_decode( $secondary_cta ) );
+
+		} else {
+
+			/* We have a non-HTML string */
+			$secondary_cta_output = $secondary_cta;
+		}
+
+		if ( $secondary_cta ) {
+			/**
 					 * This ridiculous function is modified from Visual Composer
 					 * core (vc-raw-html.php), with the main htmlentities()
 					 * wrapper function removed to allow for including HTML.
 					 */
-				?>
-					<p class="secondary-cta"><?php echo rawurldecode( base64_decode( $secondary_cta ) ); ?></p>
-				<?php endif; ?>
+
+			$secondary_cta_output = '<p class="secondary-cta">' . $secondary_cta_output . '</p>';
+
+		}
+
+	ob_start(); ?>
+
+	<div class="hero-banner <?php echo $css_classes; ?>" style="<?php echo $style; ?>">
+		<?php echo $overlay; ?>
+
+		<div class="hero-text-wrapper">
+			<div class="wrapper">
+				<?php echo $heading_output; ?>
+
+				<?php echo $content_output; ?>
+
+				<?php echo do_shortcode( $button_output ); ?>
+
+				<?php echo do_shortcode( $video_oEmbed_output ); ?>
+
+				<?php echo do_shortcode( $secondary_cta_output ); ?>
 			</div>
 		</div>
 	</div>
