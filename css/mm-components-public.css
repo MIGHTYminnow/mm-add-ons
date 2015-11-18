@@ -484,10 +484,6 @@ a.mm-button.full-width {
     margin-bottom: 0 !important;
 }
 
-.hero-banner .secondary-cta a {
-    text-decoration: underline;
-}
-
 .hero-banner .secondary-cta a:hover {
     opacity: 0.8;
 }

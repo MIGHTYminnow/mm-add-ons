@@ -186,32 +186,32 @@ function mm_hero_banner( $args ) {
 
 	$secondary_cta_output  = '';
 
-		if ( strpos( $secondary_cta, '<' ) ) {
+	if ( strpos( $secondary_cta, '<' ) ) {
 
-			/* We have HTML */
-			$secondary_cta_output = ( function_exists( 'wpb_js_remove_wpautop' ) ) ? wpb_js_remove_wpautop( $secondary_cta, true ) : $secondary_cta;
+		/* We have HTML */
+		$secondary_cta_output = ( function_exists( 'wpb_js_remove_wpautop' ) ) ? wpb_js_remove_wpautop( $secondary_cta, true ) : $secondary_cta;
 
-		} elseif ( mm_is_base64( $secondary_cta ) ) {
+	} elseif ( mm_is_base64( $secondary_cta ) ) {
 
-			/* We have a base64 encoded string */
-			$secondary_cta_output = rawurldecode( base64_decode( $secondary_cta ) );
+		/* We have a base64 encoded string */
+		$secondary_cta_output = rawurldecode( base64_decode( $secondary_cta ) );
 
-		} else {
+	} else {
 
-			/* We have a non-HTML string */
-			$secondary_cta_output = $secondary_cta;
-		}
+		/* We have a non-HTML string */
+		$secondary_cta_output = $secondary_cta;
+	}
 
-		if ( $secondary_cta ) {
-			/**
-					 * This ridiculous function is modified from Visual Composer
-					 * core (vc-raw-html.php), with the main htmlentities()
-					 * wrapper function removed to allow for including HTML.
-					 */
+	if ( $secondary_cta ) {
+		/**
+				 * This ridiculous function is modified from Visual Composer
+				 * core (vc-raw-html.php), with the main htmlentities()
+				 * wrapper function removed to allow for including HTML.
+				 */
 
-			$secondary_cta_output = '<p class="secondary-cta">' . $secondary_cta_output . '</p>';
+		$secondary_cta_output = '<p class="secondary-cta">' . $secondary_cta_output . '</p>';
 
-		}
+	}
 
 	ob_start(); ?>
 
@@ -628,11 +628,7 @@ class Mm_Hero_Banner_Widget extends Mm_Components_Widget {
 			$classname . '-text-position widefat',
 			'text_position',
 			$text_position,
-			array(
-				'left'   => 'Left',
-				'center' => 'Center',
-				'right'  => 'Right',
-				)
+			mm_get_text_alignment()
 		);
 
 		// Button Type.
