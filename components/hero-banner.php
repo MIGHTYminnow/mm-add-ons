@@ -50,8 +50,7 @@ function mm_hero_banner( $args ) {
 	$button_target = '';
 
 	// Build the CSS classes.
-	$css_classes = 'mm-text-align-' . $args['text_position'];
-	$css_classes .= ' full-width';
+
 
 
 	// Setup button classes.
@@ -68,6 +67,8 @@ function mm_hero_banner( $args ) {
 
 	// Get MM classes.
 	$mm_classes = apply_filters( 'mm_components_custom_classes', '', $component, $args );
+	$mm_classes .= ' mm-text-align-' . $args['text_position'];
+	$mm_classes .= ' full-width';
 
 	/**
 	 * Parse images.
@@ -140,10 +141,12 @@ function mm_hero_banner( $args ) {
 
 		$button_output =
 		sprintf(
-			'[button href="%s" target="%s" class="%s"]%s[/button]',
-			$button_url,
-			$button_target,
+			'[mm_button link="%s" title="%s" target="%s" class="%s" alignment="%s"]%s[/mm_button]',
+			esc_url( $button_url ),
+			esc_attr( $button_title ),
+			esc_attr( $button_target ),
 			esc_attr( $button_classes ),
+			esc_attr( $text_position ),
 			$button_text
 		);
 
@@ -172,19 +175,14 @@ function mm_hero_banner( $args ) {
 	}
 
 	if ( $secondary_cta ) {
-		/**
-		 * This ridiculous function is modified from Visual Composer
-		 * core (vc-raw-html.php), with the main htmlentities()
-		 * wrapper function removed to allow for including HTML.
-		 */
 
-		$secondary_cta_output = '<p class="secondary-cta">' . $secondary_cta_output . '</p>';
+		$secondary_cta_output = '<div class="secondary-cta">' . $secondary_cta_output . '</div>';
 
 	}
 
 	ob_start(); ?>
 
-	<div class="hero-banner <?php echo $css_classes; ?>" style="<?php echo $style; ?>">
+	<div class="hero-banner <?php echo esc_attr( $mm_classes ); ?>" style="<?php echo $style; ?>">
 		<?php echo $overlay; ?>
 
 		<div class="hero-text-wrapper">
@@ -326,7 +324,6 @@ function mm_vc_hero_banner() {
 				'param_name' => 'button_color',
 				'value' => array(
 					__( 'Default', 'mm-components ') => 'default',
-					__( 'Pink', 'mm-components ') => 'pink',
 					__( 'White', 'mm-components ') => 'white',
 					__( 'Gray', 'mm-components ') => 'gray',
 				),
@@ -604,7 +601,6 @@ class Mm_Hero_Banner_Widget extends Mm_Components_Widget {
 			$button_color,
 			array(
 				'default' => 'Default',
-				'pink'    => 'Pink',
 				'white'   => 'White',
 				'gray'    => 'Gray',
 				)
