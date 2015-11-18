@@ -436,17 +436,34 @@ a.mm-button.full-width {
 
 /* Logo Strip
 --------------------------------------------- */
-.mm-logo-strip {
-  text-align: center;
-}
 
-.mm-logo-strip .logo {
-  display: inline-block;
-  padding: 0 15px 15px;
-}
+  .mm-logo-strip {
+    text-align: center;
+  }
 
-.mm-logo-strip .logo img {
-  display: block;
+  .mm-logo-strip .logo {
+    display: block;
+  }
+
+  .mm-logo-strip .logo img {
+    display: block;
+    max-width: 50%;
+    margin: 1.5rem auto;
+  }
+
+@media (min-width: 600px) {
+
+  .mm-logo-strip .logo {
+    display: inline-block;
+    padding: 0 15px 15px;
+  }
+
+  .mm-logo-strip .logo img {
+    display: block;
+    max-height: 50px;
+    max-width: 100%;
+    margin: 0;
+  }
 }
 
 /* Posts
