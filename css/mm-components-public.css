@@ -457,12 +457,7 @@ a.mm-button.full-width {
 
 .hero-banner a.mm-button {
   display: inline-block;
-  padding: 15px 25px;
-  border-bottom: none;
-  text-decoration: none;
-  transition: all 0.2s ease-in-out;
   background-color: #99CCCC;
-  color: #fff !important;
 }
 
 .hero-banner a.mm-button:hover  {

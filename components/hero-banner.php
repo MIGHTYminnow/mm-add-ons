@@ -21,10 +21,8 @@ function mm_hero_banner( $args ) {
 		'heading'             => '',
 		'content'             => '',
 		'text_position'       => 'left',
-		'button_type'         => 'standard',
 		'button_link'         => '',
 		'button_link_target'  => '',
-		'button_video_url'    => '',
 		'button_text'         => __( 'Read More', 'mm-components' ),
 		'button_style'        => '',
 		'button_color'        => '',
@@ -40,10 +38,8 @@ function mm_hero_banner( $args ) {
 	$heading              = $args['heading'];
 	$content              = $args['content'];
 	$text_position        = $args['text_position'];
-	$button_type          = $args['button_type'];
 	$button_link          = $args['button_link'];
 	$button_link_target   = $args['button_link_target'];
-	$button_video_url     = $args['button_video_url'];
 	$button_text          = $args['button_text'];
 	$button_style         = $args['button_style'];
 	$button_color         = $args['button_color'];
@@ -61,9 +57,6 @@ function mm_hero_banner( $args ) {
 	// Setup button classes.
 	$button_classes = array();
 	$button_classes[] = 'mm-button';
-	if ( ! empty( $args['button_type'] ) ) {
-		$button_classes[] = $args['button_type'];
-	}
 	if( ! empty( $args['button_style'] ) ) {
 		$button_classes[] = $args['button_style'];
 	}
@@ -141,48 +134,24 @@ function mm_hero_banner( $args ) {
 	}
 
 	$button_output = '';
-	$video_oEmbed_output = '';
-
-	// Get lightbox classes
-	$lightbox_classes = str_replace( '_', '-', $component );
-	$lightbox_classes = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, $lightbox_classes, $component, $args );
-	$lightbox_classes .= " width";
-
-	// Get link classes.
-	$link_classes = '';
-	$link_classes .= ' ' . $button_style;
-	$link_classes .= ' ' . $button_color;
 
 	//Output the button.
-	if ( 'standard' == $button_type && $button_url ) {
+	if ( $button_url ) {
 
-		$button_output = sprintf( '[button href="%s" target="%s" class="%s"]%s[/button]',
-							$button_url,
-							$button_target,
-							esc_attr( $button_classes ),
-							$button_text
-						);
+		$button_output =
+		sprintf(
+			'[button href="%s" target="%s" class="%s"]%s[/button]',
+			$button_url,
+			$button_target,
+			esc_attr( $button_classes ),
+			$button_text
+		);
 
 	} else {
 
 		'' == $button_output;
 	}
 
-	if ( 'video' == $button_type && $button_video_url ) {
-
-		$video_oEmbed = apply_filters( 'the_content', $button_video_url );
-
-		if ( $video_oEmbed ) {
-
-			$video_oEmbed_output = sprintf( '[igg-lightbox link_text="%s" class="%s" lightbox_class="%s"]%s[/igg-lightbox]',
-									$button_video_url,
-									$link_classes,
-									$lightbox_classes,
-									do_shortcode( $video_oEmbed )
-									);
-			}
-
-		}
 
 	$secondary_cta_output  = '';
 
@@ -204,10 +173,10 @@ function mm_hero_banner( $args ) {
 
 	if ( $secondary_cta ) {
 		/**
-				 * This ridiculous function is modified from Visual Composer
-				 * core (vc-raw-html.php), with the main htmlentities()
-				 * wrapper function removed to allow for including HTML.
-				 */
+		 * This ridiculous function is modified from Visual Composer
+		 * core (vc-raw-html.php), with the main htmlentities()
+		 * wrapper function removed to allow for including HTML.
+		 */
 
 		$secondary_cta_output = '<p class="secondary-cta">' . $secondary_cta_output . '</p>';
 
@@ -225,8 +194,6 @@ function mm_hero_banner( $args ) {
 				<?php echo $content_output; ?>
 
 				<?php echo do_shortcode( $button_output ); ?>
-
-				<?php echo do_shortcode( $video_oEmbed_output ); ?>
 
 				<?php echo do_shortcode( $secondary_cta_output ); ?>
 			</div>
@@ -335,35 +302,9 @@ function mm_vc_hero_banner() {
 				),
 			),
 			array(
-				'type' => 'dropdown',
-				'heading' => __( 'Button Type', 'mm-components' ),
-				'param_name' => 'button_type',
-				'value' => array(
-					__( 'Standard', 'mm-components ') => 'standard',
-					__( 'Video', 'mm-components ') => 'video',
-				),
-			),
-			array(
 				'type' => 'vc_link',
 				'heading' => __( 'Button URL', 'mm-components' ),
 				'param_name' => 'button_link',
-				'dependency' => array(
-					'element' => 'button_type',
-					'value' => array(
-						'standard',
-					),
-				),
-			),
-			array(
-				'type' => 'textfield',
-				'heading' => __( 'Video URL', 'mm-components' ),
-				'param_name' => 'button_video_url',
-				'dependency' => array(
-					'element' => 'button_type',
-					'value' => array(
-						'video',
-					),
-				),
 			),
 			array(
 				'type' => 'textfield',
@@ -469,10 +410,8 @@ class Mm_Hero_Banner_Widget extends Mm_Components_Widget {
 			'heading'             => '',
 			'content'             => '',
 			'text_position'       => 'left',
-			'button_type'         => '',
 			'button_link'         => '',
 			'button_link_target'  => '',
-			'button_video_url'    => '',
 			'button_text'         => __( 'Read More', 'mm-components' ),
 			'button_style'        => '',
 			'button_color'        => '',
@@ -490,10 +429,8 @@ class Mm_Hero_Banner_Widget extends Mm_Components_Widget {
 		$heading              = $instance['heading'];
 		$content              = $instance['content'];
 		$text_position        = $instance['text_position'];
-		$button_type          = $instance['button_type'];
 		$button_link          = $instance['button_link'];
 		$button_link_target   = $instance['button_link_target'];
-		$button_video_url     = $instance['button_video_url'];
 		$button_text          = $instance['button_text'];
 		$button_style         = $instance['button_style'];
 		$button_color         = $instance['button_color'];
@@ -531,10 +468,8 @@ class Mm_Hero_Banner_Widget extends Mm_Components_Widget {
 			'heading'             => '',
 			'content'             => '',
 			'text_position'       => 'left',
-			'button_type'         => '',
 			'button_link'         => '',
 			'button_link_target'  => '',
-			'button_video_url'    => '',
 			'button_text'         => __( 'Read More', 'mm-components' ),
 			'button_style'        => '',
 			'button_color'        => '',
@@ -551,10 +486,8 @@ class Mm_Hero_Banner_Widget extends Mm_Components_Widget {
 		$heading              = $instance['heading'];
 		$content              = $instance['content'];
 		$text_position        = $instance['text_position'];
-		$button_type          = $instance['button_type'];
 		$button_link          = $instance['button_link'];
 		$button_link_target   = $instance['button_link_target'];
-		$button_video_url     = $instance['button_video_url'];
 		$button_text          = $instance['button_text'];
 		$button_style         = $instance['button_style'];
 		$button_color         = $instance['button_color'];
@@ -631,19 +564,6 @@ class Mm_Hero_Banner_Widget extends Mm_Components_Widget {
 			mm_get_text_alignment()
 		);
 
-		// Button Type.
-		$this->field_select(
-			__( 'Button Type', 'mm-components' ),
-			'',
-			$classname . '-button-type widefat',
-			'button_type',
-			$button_type,
-			array(
-				'standard' => 'Standard',
-				'video'    => 'Video',
-				)
-		);
-
 		// Button Link.
 		$this->field_text(
 			__( 'Button Link', 'mm-components' ),
@@ -651,15 +571,6 @@ class Mm_Hero_Banner_Widget extends Mm_Components_Widget {
 			$classname . '-button-link widefat',
 			'button_link',
 			$button_link
-		);
-
-		// Button Video URL.
-		$this->field_text(
-			__( 'Button Video URL', 'mm-components' ),
-			'',
-			$classname . '-button-video-url widefat',
-			'button_video_url',
-			$button_video_url
 		);
 
 		// Button Text.
@@ -729,10 +640,8 @@ class Mm_Hero_Banner_Widget extends Mm_Components_Widget {
 		$instance['heading']             = sanitize_text_field( $new_instance['heading'] );
 		$instance['content']             = wp_kses_post( $new_instance['content'] );
 		$instance['text_position']       = sanitize_text_field( $new_instance['text_position'] );
-		$instance['button_type']         = sanitize_text_field( $new_instance['button_type'] );
 		$instance['button_link']         = sanitize_text_field( $new_instance['button_link'] );
 		$instance['button_link_target']  = sanitize_text_field( $new_instance['button_link_target'] );
-		$instance['button_video_url']    = sanitize_text_field( $new_instance['button_video_url'] );
 		$instance['button_text']         = sanitize_text_field( $new_instance['button_text'] );
 		$instance['button_style']        = sanitize_text_field( $new_instance['button_style'] );
 		$instance['button_color']        = sanitize_text_field( $new_instance['button_color'] );
