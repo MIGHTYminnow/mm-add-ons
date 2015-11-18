@@ -474,6 +474,15 @@ a.mm-button.full-width {
   background-color: transparent;
 }
 
+.hero-banner a.mm-button.white {
+  background-color: #ebebeb;
+}
+
+
+.hero-banner a.mm-button.gray{
+  background-color: #757C7D;
+}
+
 .hero-banner .secondary-cta {
     margin-top: 1.5em;
     margin-bottom: 0 !important;

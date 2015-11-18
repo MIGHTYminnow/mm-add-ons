@@ -45,14 +45,6 @@ function mm_hero_banner( $args ) {
 	$button_color         = $args['button_color'];
 	$secondary_cta        = $args['secondary_cta'];
 
-	$button_url    = '';
-	$button_title  = '';
-	$button_target = '';
-
-	// Build the CSS classes.
-
-
-
 	// Setup button classes.
 	$button_classes = array();
 	$button_classes[] = 'mm-button';
@@ -141,12 +133,12 @@ function mm_hero_banner( $args ) {
 
 		$button_output =
 		sprintf(
-			'[mm_button link="%s" title="%s" target="%s" class="%s" alignment="%s"]%s[/mm_button]',
-			esc_url( $button_url ),
-			esc_attr( $button_title ),
-			esc_attr( $button_target ),
+			'[mm_button class="%s" alignment="%s" href="%s" target="%s" title="%s" ]%s[/mm_button]',
 			esc_attr( $button_classes ),
 			esc_attr( $text_position ),
+			$button_url,
+			$button_target,
+			$button_title,
 			$button_text
 		);
 
@@ -326,12 +318,6 @@ function mm_vc_hero_banner() {
 					__( 'Default', 'mm-components ') => 'default',
 					__( 'White', 'mm-components ') => 'white',
 					__( 'Gray', 'mm-components ') => 'gray',
-				),
-				'dependency' => array(
-					'element' => 'button_style',
-					'value' => array(
-						'ghost',
-					),
 				),
 			),
 			array(
