@@ -523,13 +523,48 @@ function mm_get_available_colors_for_vc() {
 }
 
 /**
+ * Return an array of registered overlay color names.
+ *
+ * @since   1.0.0
+ *
+ * @param   string  The component calling this function.
+ *
+ * @return  array   The array of overlay colors.
+ */
+function mm_get_available_overlay_colors( $component = '' ) {
+
+	$colors = array(
+		'default' => __( 'Default', 'mm-components' ),
+		'light'   => __( 'Light', 'mm-components' ),
+		'medium'  => __( 'Medium', 'mm-components' ),
+		'dark'    => __( 'Dark', 'mm-components' ),
+	);
+
+	return apply_filters( 'mm_get_available_overlay_colors', $colors, $component );
+}
+
+/**
+ * Return an array of overlay color names for use in a Visual Composer dropdown param.
+ *
+ * @since   1.0.0
+ *
+ * @param   string  The component calling this function.
+ *
+ * @return  array  The array of overlay colors.
+ */
+function mm_get_available_overlay_colors_for_vc( $component = '' ) {
+
+	return array_flip( mm_get_available_overlay_colors( $component ) );
+}
+
+/**
  * Return an array of text alignment options.
  *
  * @since   1.0.0
  *
  * @return  array  The array of options.
  */
-function mm_get_text_alignment() {
+function mm_get_text_alignment( $component = '' ) {
 
 	$text_alignment = array(
 		'default' => __( 'Default', 'mm-components' ),
@@ -537,6 +572,8 @@ function mm_get_text_alignment() {
 		'center'  => __( 'Center', 'mm-components' ),
 		'right'   => __( 'Right', 'mm-components' ),
 	);
+
+	$text_alignment = apply_filters( 'mm_get_text_alignment', $text_alignment, $component );
 
 	return $text_alignment;
 }
