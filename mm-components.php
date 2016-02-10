@@ -63,6 +63,7 @@ function mm_components_init_components() {
 		'logo-strip'         => __( 'Logo Strip', 'mm-components' ),
 		'posts'              => __( 'Posts', 'mm-components' ),
 		'restricted-content' => __( 'Restricted Content', 'mm-components' ),
+		'slider'             => __( 'Slider', 'mm-components' ),
 		'social-icons'       => __( 'Social Icons', 'mm-components' ),
 		'users'              => __( 'Users', 'mm-components' ),
 	);
@@ -111,6 +112,9 @@ function mm_components_init_components() {
 	}
 	if ( array_key_exists( 'restricted-content', $mm_active_components ) ) {
 		require_once MM_COMPONENTS_PATH . 'components/restricted-content/restricted-content.php';
+	}
+	if ( array_key_exists( 'slider', $mm_active_components ) ) {
+		require_once MM_COMPONENTS_PATH . 'components/slider/slider.php';
 	}
 	if ( array_key_exists( 'social-icons', $mm_active_components ) ) {
 		require_once MM_COMPONENTS_PATH . 'components/social-icons/social-icons.php';
