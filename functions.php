@@ -540,6 +540,40 @@ function mm_get_social_networks_for_vc( $context = '' ) {
 }
 
 /**
+ * Return an array of image card styles.
+ *
+ * @since   1.0.0
+ *
+ * @param   string  $context  The context to pass to our filter.
+ *
+ * @return  array             The array of image card styles.
+ */
+function mm_get_image_card_styles( $context = '' ) {
+
+	// Add an empty first option.
+	$image_card_style = array(
+		'button'         => __( 'Button', 'mm-components' ),
+		'text-inside'    => __( 'Text Inside', 'mm-components' ),
+	);
+
+	return apply_filters( 'mm_get_image_card_styles', $image_card_style, $context );
+}
+
+/**
+ * Return an array of image card styles for use in a Visual Composer param.
+ *
+ * @since   1.0.0
+ *
+ * @param   string  $context  The context to pass to our filter.
+ *
+ * @return  array             The array of image card styles.
+ */
+function mm_get_image_card_styles_for_vc( $context = '' ) {
+
+	return array_flip( mm_get_image_card_styles( $context ) );
+}
+
+/**
  * Return an array of timezones.
  *
  * @since   1.0.0
@@ -794,6 +828,42 @@ function mm_get_overlay_opacity_values( $context = '' ) {
 function mm_get_overlay_opacity_values_for_vc( $context = '' ) {
 
 	return array_flip( mm_get_overlay_opacity_values( $context ) );
+}
+
+/**
+ * Return an array of wrapper elements.
+ *
+ * @since   1.0.0
+ *
+ * @param   string  $context  The context to pass to our filter.
+ *
+ * @return  array             The array of heading levels.
+ */
+function mm_get_wrapper_elements( $context = '' ) {
+
+	$wrapper_elements = mm_get_heading_levels( $context );
+
+	$wrapper_elements['p'] = __( 'p', 'mm-components' );
+
+	return apply_filters( 'mm_wrapper_elements', $wrapper_elements, $context );
+}
+
+/**
+ * Return an array of heading levels for use in a Visual Composer dropdown param.
+ *
+ * @since   1.0.0
+ *
+ * @param   string  $context  The context to pass to our filter.
+ *
+ * @return  array             The array of heading levels.
+ */
+function mm_get_wrapper_elements_for_vc( $context = '' ) {
+
+	$empty_option = array(
+		__( 'Select an element', 'mm-components' ),
+	);
+
+	return $empty_option + array_flip( mm_get_wrapper_elements( $context ) );
 }
 
 /**
