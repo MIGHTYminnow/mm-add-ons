@@ -552,8 +552,8 @@ function mm_get_image_card_styles( $context = '' ) {
 
 	// Add an empty first option.
 	$image_card_styles = array(
-		'button'      => __( 'Button', 'mm-components' ),
-		'text-inside' => __( 'Text Inside', 'mm-components' ),
+		'button-bottom' => __( 'Button Bottom', 'mm-components' ),
+		'text-inside'   => __( 'Text Inside', 'mm-components' ),
 	);
 
 	return apply_filters( 'mm_get_image_card_styles', $image_card_styles, $context );
