@@ -822,6 +822,45 @@ a.mm-button.full-width {
   margin: 0 15px 0 0;
 }
 
+/* Slider
+--------------------------------------------- */
+.mm-slider {
+  margin-bottom: 30px;
+}
+
+.mm-slider .mm-carousel-item {
+  text-align: center;
+}
+
+.mm-slider.content-as-slides .mm-carousel-item {
+  margin-right: 16px;
+}
+
+.mm-slider .mm-carousel-item,
+.mm-slider.full-width .mm-carousel-item[class*='slide-'] img,
+.mm-slider.full-width .mm-carousel-item img {
+  width: 100%;
+}
+
+.mm-slider.mm-full-window-height .mm-carousel-item img,
+.mm-slider:not(.adaptive) .mm-carousel-item {
+  height: 100%;
+}
+
+.mm-slider > .content-wrapper {
+  position: absolute;
+  z-index: 10;
+}
+
+.flickity-prev-next-button {
+  z-index: 20;
+}
+
+ol.flickity-page-dots {
+  margin-left: 0 !important;
+  margin-bottom: 0 !important;
+}
+
 /* Social Icons
 --------------------------------------------- */
 /* Defaults */
