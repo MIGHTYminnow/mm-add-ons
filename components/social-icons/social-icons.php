@@ -104,9 +104,10 @@ function mm_social_icons( $args ) {
 				}
 
 				printf(
-					'<a href="%s" class="%s">%s</a>',
+					'<a href="%s" class="%s" aria-label="%s link">%s</a>',
 					esc_url( $link ),
 					esc_attr( $social_network . '-link' ),
+					esc_attr( $social_network ),
 					$icon
 				);
 			}
